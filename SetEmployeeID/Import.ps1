@@ -61,7 +61,7 @@ foreach ($Domain in $Domains){
     ($_.displayname -notlike '*service*')  -and
     ($_.DistinguishedName -notlike '*CN=Users,DC=Alco,DC=local')
     } 
-    $users.pdcemulator += $pdc
+    $users.pdcemulator = $pdc
 }
     "     $($users.count) users retreived from Active Directory "  + (Get-Date) | out-file $DebugFile -Append
     
