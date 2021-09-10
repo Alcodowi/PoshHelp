@@ -84,7 +84,7 @@ foreach ($Domain in $Domains){
         $UserObj.add("DistinguishedName",$User.DistinguishedName)
         $UserObj.add("employeeType",$User.employeeType)
         $UserObj.add("mail",$User.mail)
-        $UserObj.add("name",$User.mail)
+        $UserObj.add("name",$User.name)
         $UserObj.add("FromPowershell",$true)
         $UserObj  
     }
