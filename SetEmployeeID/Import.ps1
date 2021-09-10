@@ -52,7 +52,7 @@ foreach ($Domain in $Domains){
     ($_.samaccountname -notlike '*.adm') -and
     ($_.samaccountname -notlike '*-adm') -and
     ($_.samaccountname -notlike 'SM*') -and
-    ($_.samaccountname -notlike 'HealthMailbox*') -and
+    ($_.samaccountname -notlike '*HealthMailbox*') -and
     #($_.sn -like '*-ext') -and
     ($_.sn -like '*') -and
     ($_.UserPrincipalName -notlike '*.local') -and
@@ -61,6 +61,7 @@ foreach ($Domain in $Domains){
     ($_.sn -notlike '*service*') -and
     ($_.displayname -notlike '*service*')  -and
     ($_.DistinguishedName -notlike 'CN=Users,DC=Alco,DC=local')
+    ($_.DistinguishedName -notlike 'CN=monitoring*')
     } 
 }
     "     $($users.count) users retreived from Active Directory "  + (Get-Date) | out-file $DebugFile -Append
