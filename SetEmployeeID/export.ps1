@@ -18,51 +18,9 @@ begin
 
     # Password from the MA
     $securestring = ConvertTo-SecureString -AsPlainText $Password -Force
-
-    # // Exchange 2013
-    # Setup Remote Local Exchange Online Powershell Session 
-    $username = 'ExchangeAdministrator'
-    $server = "http://Exch01.alco.local/powershell/"
-    $onpremusername ="adm.jbd"
-    $credential = New-Object -TypeName System.Management.Automation.PSCredential -argumentlist $onpremusername, $securestring
-
-    # // Exchange Online
-    # Setup Exchange Online Powershell Sessions
-    $EXOURI = 'https://outlook.office365.com/powershell-liveid/'
-    $EXOUserName = 'administrateur@labjb.onmicrosoft.com'
-    $EXOcredential = New-Object -TypeName System.Management.Automation.PSCredential -argumentlist $EXOUserName, $securestring
-        
+       
     Import-Module lithnetMIISAutomation
-    $EXOMA = 'Exchange Online'
-
-     "Looking to see if we have an EXO RPS Session" | Out-File $DebugFile -Append    	
-    if ($Global:ExportSession){
-        "     RPS EXO Session already exists " + (get-date) | Out-File $DebugFile -Append   
-        if ($(!$ExportSession.State -eq "Opened")){
-            "     RPS Session was broken so opening a new one " + (get-date) | Out-File $DebugFile -Append   
-            $Global:ExportSession = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri $EXOURI -Authentication Basic -AllowRedirection -Credential $EXOcredential
-            Import-PSSession $ExportSession
-        }
-    } else {
-           "     RPS Session didn't exist. Opening an RPS Session " + (get-date) | Out-File $DebugFile -Append   
-           $Global:ExportSession = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri $EXOURI -Authentication Basic -AllowRedirection -Credential $EXOcredential
-           Import-PSSession $ExportSession     
-    }
-    
-    "Looking to see if we have an Local Exchange RPS Session" | Out-File $DebugFile -Append
-    if ($Global:LocalExportSession){       
-       "     RPS Local Session already exists " + (get-date) | Out-File $DebugFile -Append   
-       if ($(!$LocalExportSession.State -eq "Opened")){
-            "     RPS Local Exchange Session was broken so opening a new one " + (get-date) | Out-File $DebugFile -Append   
-            $Global:LocalExportSession = New-PSSession -ConfigurationName Microsoft.ExchangeLocal -ConnectionUri $server -Authentication Kerberos -Credential $credential
-            Import-PSSession $LocalExportSession
-        } 
-        }else {
-            "     RPS Local Session didn't exist. Opening an RPS Local Session " + (get-date) | Out-File $DebugFile -Append   
-           $Global:LocalExportSession = New-PSSession -ConfigurationName Microsoft.ExchangeLocal -ConnectionUri $server -Authentication Kerberos -Credential $credential
-           Import-PSSession $LocalExportSession     
-        }
-    
+    $EXOMA = 'EmployeeID' 
 
 }
 
