@@ -33,7 +33,7 @@ if(!(Test-Path $DebugFilePath))
     "     Retreiving User  "  + (Get-Date)  | out-file $DebugFile -Append 
 >
 #$users | Add-Member -Type NoteProperty -Name "PDCEmulator" -Force -Value ""    
-$domains ="Alco.local","jbdlab.local"
+$domains ="Alco.local"
 $alco="Alco.local"
 $jbdlab="jbdlab.local"
 foreach ($Domain in $Domains){
@@ -77,13 +77,13 @@ foreach ($Domain in $Domains){
         $UserObj.add("SamAccountName", $User.SamAccountName)
         $UserObj.add("objectClass", "Externaluser") 
         
-        if ($user.DistinguishedName -like "DC=Alco,DC=local"){
+       <# if ($user.DistinguishedName -like "DC=Alco,DC=local"){
 
         $UserObj.add("PDCEmulator", $alco)
         }
         else {
             $UserObj.add("PDCEmulator", $jbdlab) 
-        }
+        }#>
         $UserObj.add("DistinguishedName",$User.DistinguishedName)
         $UserObj.add("employeeType",$User.employeeType)
         $UserObj.add("mail",$User.mail)
