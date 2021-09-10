@@ -62,7 +62,7 @@ process
             $displayName = $mvUserObj.Attributes.displayName.Values.valuestring
             $alias = $mvUserObj.Attributes.mailNickname.Values.valuestring
             $identity = $mvUserObj.Attributes.accountName.Values.valuestring
-            $server = $mvUserObj.attributes.PDCEmulator
+            $server = $mvUserObj.attributes.AA_pdcemulator
             $employeeID = $mvUserObj.attributes.employeeID
             
             ## If Alias in changed Attrs and user not mailbox enabled then Enable 
