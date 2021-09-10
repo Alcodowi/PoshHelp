@@ -34,7 +34,7 @@ if(!(Test-Path $DebugFilePath))
 >
 #$users | Add-Member -Type NoteProperty -Name "PDCEmulator" -Force -Value ""    
 $domains ="Alco.local","jbdlab.local"
-$users | Add-Member -Type NoteProperty -Name "PDCEmulator|String" -Value "" -force
+$users | Add-Member -Type NoteProperty -Name "PDCEmulator|String" -Value "$PDC" -force
 foreach ($Domain in $Domains){
 
     $GetDom = Get-ADDomain $Domain
@@ -61,7 +61,7 @@ foreach ($Domain in $Domains){
     ($_.displayname -notlike '*service*')  -and
     ($_.DistinguishedName -notlike '*CN=Users,DC=Alco,DC=local')
     } 
-    $users.Add("PDCEmulator", $PDC)
+    $users.pdcemulator += $pdc
 }
     "     $($users.count) users retreived from Active Directory "  + (Get-Date) | out-file $DebugFile -Append
     
