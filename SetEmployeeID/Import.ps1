@@ -81,8 +81,7 @@ foreach ($Domain in $Domains){
         }
         else {
             $UserObj.add("PDCEmulator", $jbdlab) 
-        }        
-
+        }
         $UserObj.add("DistinguishedName",$User.DistinguishedName)
         $UserObj.add("employeeType",$User.employeeType)
         $UserObj.add("mail",$User.mail)
