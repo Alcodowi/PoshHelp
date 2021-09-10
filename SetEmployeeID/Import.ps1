@@ -36,7 +36,7 @@ if(!(Test-Path $DebugFilePath))
 $domains ="Alco.local","jbdlab.local"
 $alco="Alco.local"
 $jbdlab="jbdlab.local"
-$users | Add-Member -Type NoteProperty -Name "PDCEmulator|String" -Value "$PDC" -force
+$initialseed="EXT002000"
 foreach ($Domain in $Domains){
 
     $GetDom = Get-ADDomain $Domain
@@ -71,6 +71,7 @@ foreach ($Domain in $Domains){
 "     Processing user " +(Get-Date) | Out-File $DebugFile -Append
 # Process Users without Mailboxes 
     Foreach ($user in $users) { 
+        <#
         $UserObj = @{}
         $UserObj.add("SamAccountName", $User.SamAccountName)
         $UserObj.add("objectClass", "Externaluser") 
@@ -86,6 +87,14 @@ foreach ($Domain in $Domains){
         $UserObj.add("employeeType",$User.employeeType)
         $UserObj.add("mail",$User.mail)
         $UserObj.add("name",$User.mail)
-        $UserObj  
+        $UserObj 
+         #>
+         if ($user.DistinguishedName -like "*DC=Alco,DC=local*"){
+            $server=$alco
+            }
+            else {
+                $server=$jbdlab
+            }
+         Set-ADUser -Identity $user.DistinguishedName -EmployeeID $initialseed++ -Server $server
     }   
 "Completed Import " + (Get-Date) | Out-File $DebugFile -Append 
