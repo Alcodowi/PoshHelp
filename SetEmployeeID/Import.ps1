@@ -86,6 +86,7 @@ foreach ($Domain in $Domains){
         $UserObj.add("mail",$User.mail)
         $UserObj.add("name",$User.name)
         $UserObj.add("FromPowershell",$true)
+        $UserObj.add("EmployeeID",$User.employeeID)
         $UserObj  
     }
 "Completed Import " + (Get-Date) | Out-File $DebugFile -Append 
