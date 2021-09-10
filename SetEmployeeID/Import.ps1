@@ -74,7 +74,7 @@ foreach ($Domain in $Domains){
         $UserObj.add("SamAccountName", $User.SamAccountName)
         $UserObj.add("objectClass", "Externaluser") 
         
-        if ($user.DistinguishedName -contains "DC=Alco,DC=local"){
+        if ($user.DistinguishedName -like "DC=Alco,DC=local"){
 
         $UserObj.add("PDCEmulator", $alco)
         }
@@ -86,4 +86,5 @@ foreach ($Domain in $Domains){
         $UserObj.add("mail",$User.mail)
         $UserObj.add("name",$User.mail)
         $UserObj  
+    }
 "Completed Import " + (Get-Date) | Out-File $DebugFile -Append 
