@@ -38,8 +38,8 @@ foreach ($Domain in $Domains){
 
     $GetDom = Get-ADDomain $Domain
     $PDC = $GetDom.pdcemulator
-
-    <#$user += Get-ADUser -filter {EmployeeID -NOTLIKE '*' -AND displayname -like '*ext*' -AND enabled -eq 'true' -and employeeType -eq "External"} -Server $Domain -Properties givenName,sn,mail,displayname,name,DistinguishedName,employeeType,msExchExtensionCustomAttribute1 | 
+    #$users += Get-ADUser -filter {EmployeeID -NOTLIKE '*'} -Server $PDC
+    $users += Get-ADUser -filter {EmployeeID -NOTLIKE '*' -AND displayname -like '*ext*' -AND enabled -eq 'true' -and employeeType -eq "External"} -Server $PDC -Properties givenName,sn,mail,displayname,name,DistinguishedName,employeeType,msExchExtensionCustomAttribute1 | 
     where-object {
     ($_.samaccountname -notlike 'prd.*') -and
     ($_.samaccountname -notlike 'svc.*') -and
@@ -49,14 +49,14 @@ foreach ($Domain in $Domains){
     ($_.samaccountname -notlike '*-adm') -and
     #($_.sn -like '*-ext') -and
     ($_.sn -like '*') -and
-    ($_.UserPrincipalName -notlike '*.group') -and
+    ($_.UserPrincipalName -notlike '*.local') -and
     ($_.description -notlike '*service account*') -and
     ($_.givenName -notlike '*service*') -and
     ($_.sn -notlike '*service*') -and
     ($_.displayname -notlike '*service*')  
     }
-    #>
-    $users += Get-ADUser -filter {EmployeeID -NOTLIKE '*'} -Server $PDC
+    >
+    
 }
     "     $($Users.count) users retreived from Active Directory "  + (Get-Date) | out-file $DebugFile -Append
     
