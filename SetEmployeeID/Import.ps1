@@ -43,7 +43,7 @@ foreach ($Domain in $Domains){
     #$users += Get-ADUser -filter {EmployeeID -NOTLIKE '*'} -Server $PDC
     #$users += Get-ADUser -filter {EmployeeID -NOTLIKE '*' -AND displayname -like '*ext*' -AND enabled -eq 'true' -and employeeType -eq "External"} -Server $PDC -Properties givenName,sn,mail,displayname,name,DistinguishedName,employeeType,msExchExtensionCustomAttribute1 | 
 
-    $users += Get-ADUser -filter {EmployeeID -NOTLIKE '*' -AND enabled -eq 'true'} -Server $PDC -Properties givenName,sn,mail,displayname,name,DistinguishedName,employeeType | 
+    $users += Get-ADUser -filter {EmployeeID -NOTLIKE '*' -AND enabled -eq 'true'} -Server "DC01.Alco.local" -Properties givenName,sn,mail,displayname,name,DistinguishedName,employeeType | 
     where-object {
     ($_.samaccountname -notlike 'prd.*') -and
     ($_.samaccountname -notlike 'svc.*') -and
