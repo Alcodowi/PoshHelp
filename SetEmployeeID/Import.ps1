@@ -49,6 +49,7 @@ foreach ($Domain in $Domains){
     ($_.samaccountname -notlike 'sec.*') -and
     ($_.samaccountname -notlike '*.adm') -and
     ($_.samaccountname -notlike '*-adm') -and
+    ($_.samaccountname -notlike 'SM*') -and
     #($_.sn -like '*-ext') -and
     ($_.sn -like '*') -and
     ($_.UserPrincipalName -notlike '*.local') -and
