@@ -58,16 +58,16 @@ foreach ($Domain in $Domains){
     #>
     $users += Get-ADUser -filter {EmployeeID -NOTLIKE '*'} -Server $PDC
 }
-    "     $($User.count) users retreived from Active Directory "  + (Get-Date) | out-file $DebugFile -Append
+    "     $($Users.count) users retreived from Active Directory "  + (Get-Date) | out-file $DebugFile -Append
     
 
 "     Processing user " +(Get-Date) | Out-File $DebugFile -Append
 # Process Users without Mailboxes 
     Foreach ($user in $users) { 
         $UserObj = @{}
-        $UserObj.add("SamAccountName", $User.SamAccountName)
         $UserObj.add("ObjectGUID", $User.ObjectGUID)
         $UserObj.add("objectClass", "Externaluser") 
+        $UserObj.add("SamAccountName", $User.SamAccountName)
         $UserObj.add("PDCEmulator", $PDC)
         $UserObj.add("DistinguishedName",$User.DistinguishedName)
         $UserObj.add("employeeType",$User.employeeType)
