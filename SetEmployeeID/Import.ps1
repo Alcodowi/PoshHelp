@@ -36,7 +36,6 @@ if(!(Test-Path $DebugFilePath))
 $domains ="Alco.local","jbdlab.local"
 $alco="Alco.local"
 $jbdlab="jbdlab.local"
-$lastid="EXT002000"
 foreach ($Domain in $Domains){
 
     $GetDom = Get-ADDomain $Domain
