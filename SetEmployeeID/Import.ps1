@@ -33,7 +33,7 @@ if(!(Test-Path $DebugFilePath))
     "     Retreiving User  "  + (Get-Date)  | out-file $DebugFile -Append 
 >
 #$users | Add-Member -Type NoteProperty -Name "PDCEmulator" -Force -Value ""    
-$domains ="Alco.local"
+$domains ="Alco.local","jbdlab.local"
 foreach ($Domain in $Domains){
 
     $GetDom = Get-ADDomain $Domain
@@ -74,6 +74,7 @@ foreach ($Domain in $Domains){
         $UserObj.add("DistinguishedName",$User.DistinguishedName)
         $UserObj.add("employeeType",$User.employeeType)
         $UserObj.add("mail",$User.mail)
+        $UserObj.add("name",$User.mail)
         $UserObj  
     }   
 "Completed Import " + (Get-Date) | Out-File $DebugFile -Append 
