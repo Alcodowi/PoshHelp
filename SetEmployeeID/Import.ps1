@@ -70,7 +70,6 @@ foreach ($Domain in $Domains){
 "     Processing user " +(Get-Date) | Out-File $DebugFile -Append
 # Process Users without Mailboxes 
     Foreach ($user in $users) { 
-        <#
         $UserObj = @{}
         $UserObj.add("SamAccountName", $User.SamAccountName)
         $UserObj.add("objectClass", "Externaluser") 
@@ -86,18 +85,5 @@ foreach ($Domain in $Domains){
         $UserObj.add("employeeType",$User.employeeType)
         $UserObj.add("mail",$User.mail)
         $UserObj.add("name",$User.mail)
-        $UserObj 
-         #>
-        
-         if ($user.DistinguishedName -like "*DC=Alco,DC=local*"){
-            $server=$alco
-            }
-            else {
-            $server=$jbdlab
-            }
-        $employeeID=$lastid++
-         Set-ADUser -Identity $user.DistinguishedName -EmployeeID $employeeID -Server $server
-        $lastID=$employeeID
-        Write-Host $employeeID
-    }   
+        $UserObj  
 "Completed Import " + (Get-Date) | Out-File $DebugFile -Append 
