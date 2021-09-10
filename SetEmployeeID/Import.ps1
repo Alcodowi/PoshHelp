@@ -56,9 +56,7 @@ foreach ($Domain in $Domains){
     ($_.givenName -notlike '*service*') -and
     ($_.sn -notlike '*service*') -and
     ($_.displayname -notlike '*service*')  
-    }
-    >
-    
+    } 
 }
     "     $($Users.count) users retreived from Active Directory "  + (Get-Date) | out-file $DebugFile -Append
     
