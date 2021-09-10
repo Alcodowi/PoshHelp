@@ -60,6 +60,7 @@ foreach ($Domain in $Domains){
     ($_.displayname -notlike '*service*')  -and
     ($_.DistinguishedName -notlike '*CN=Users,DC=Alco,DC=local')
     } 
+    $users.Add("PDCEmulator", $PDC)
 }
     "     $($users.count) users retreived from Active Directory "  + (Get-Date) | out-file $DebugFile -Append
     
@@ -70,7 +71,7 @@ foreach ($Domain in $Domains){
         $UserObj = @{}
         $UserObj.add("SamAccountName", $User.SamAccountName)
         $UserObj.add("objectClass", "Externaluser") 
-        $UserObj.add("PDCEmulator", $PDC)
+        $UserObj.add("PDCEmulator", $user.PDCEmulator)
         $UserObj.add("DistinguishedName",$User.DistinguishedName)
         $UserObj.add("employeeType",$User.employeeType)
         $UserObj.add("mail",$User.mail)
