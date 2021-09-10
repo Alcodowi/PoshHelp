@@ -7,7 +7,7 @@ param (
 	$pagesize
     )
 
-$DebugFilePath = "C:\scripts\Employeeid\"
+$DebugFilePath = "C:\scripts\Employeeid\ADImport.txt"
 
 if(!(Test-Path $DebugFilePath))
     {
