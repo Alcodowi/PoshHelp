@@ -8,7 +8,7 @@ param
 begin
 {   
     # // Logging
-    $DebugFilePath = "C:\scripts\EXOExport.txt"
+    $DebugFilePath = "C:\scripts\Employeeid\EXOExport.txt"
     if(!(Test-Path $DebugFilePath))
         {$DebugFile = New-Item -Path $DebugFilePath -ItemType File}
     else
