@@ -50,6 +50,7 @@ foreach ($Domain in $Domains){
     ($_.samaccountname -notlike '*.adm') -and
     ($_.samaccountname -notlike '*-adm') -and
     ($_.samaccountname -notlike 'SM*') -and
+    ($_.samaccountname -notlike 'HealthMailbox*') -and
     #($_.sn -like '*-ext') -and
     ($_.sn -like '*') -and
     ($_.UserPrincipalName -notlike '*.local') -and
