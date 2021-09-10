@@ -36,7 +36,7 @@ if(!(Test-Path $DebugFilePath))
 $domains ="Alco.local","jbdlab.local"
 $alco="Alco.local"
 $jbdlab="jbdlab.local"
-$initialseed="EXT002000"
+$lastid="EXT002000"
 foreach ($Domain in $Domains){
 
     $GetDom = Get-ADDomain $Domain
@@ -88,12 +88,15 @@ foreach ($Domain in $Domains){
         $UserObj.add("name",$User.mail)
         $UserObj 
          #>
+        
          if ($user.DistinguishedName -like "*DC=Alco,DC=local*"){
             $server=$alco
             }
             else {
             $server=$jbdlab
             }
-         Set-ADUser -Identity $user.DistinguishedName -EmployeeID $initialseed++ -Server $server
+        $employeeID=$lastid+"1"
+         Set-ADUser -Identity $user.DistinguishedName -EmployeeID $employeeID -Server $server
+        $lastID=$employeeID
     }   
 "Completed Import " + (Get-Date) | Out-File $DebugFile -Append 
