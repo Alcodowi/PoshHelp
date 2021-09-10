@@ -33,7 +33,7 @@ if(!(Test-Path $DebugFilePath))
     "     Retreiving User  "  + (Get-Date)  | out-file $DebugFile -Append 
 >
 #$users | Add-Member -Type NoteProperty -Name "PDCEmulator" -Force -Value ""    
-$domains = "jbdlab.local","Alco.local"
+$domains ="Alco.local"
 foreach ($Domain in $Domains){
 
     $GetDom = Get-ADDomain $Domain
