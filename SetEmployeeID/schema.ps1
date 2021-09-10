@@ -9,4 +9,5 @@ $obj | Add-Member -Type NoteProperty -Name "Domain|String" -Value ""
 $obj | Add-Member -Type NoteProperty -Name "PDCEmulator|String" -Value ""
 $obj | Add-Member -Type NoteProperty -Name "name|String" -Value ""
 $obj | Add-Member -Type NoteProperty -Name "employeeID|String" -Value ""
+$obj | Add-Member -Type NoteProperty -Name "NeedID|Boolean" -Value ""
 $obj 
