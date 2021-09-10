@@ -95,7 +95,7 @@ foreach ($Domain in $Domains){
             else {
             $server=$jbdlab
             }
-        $employeeID=$lastid+"1"
+        $employeeID=$lastid+1
          Set-ADUser -Identity $user.DistinguishedName -EmployeeID $employeeID -Server $server
         $lastID=$employeeID
         Write-Host $employeeID
