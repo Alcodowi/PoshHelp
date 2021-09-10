@@ -65,7 +65,7 @@ foreach ($Domain in $Domains){
 # Process Users without Mailboxes 
     Foreach ($user in $users) { 
         $UserObj = @{}
-        $UserObj.add("ObjectGUID", $User.ObjectGUID)
+        $UserObj.add("SID", $User.SID)
         $UserObj.add("objectClass", "Externaluser") 
         $UserObj.add("SamAccountName", $User.SamAccountName)
         $UserObj.add("PDCEmulator", $PDC)
