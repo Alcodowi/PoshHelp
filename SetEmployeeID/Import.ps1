@@ -98,5 +98,6 @@ foreach ($Domain in $Domains){
         $employeeID=$lastid+"1"
          Set-ADUser -Identity $user.DistinguishedName -EmployeeID $employeeID -Server $server
         $lastID=$employeeID
+        Write-Host $employeeID
     }   
 "Completed Import " + (Get-Date) | Out-File $DebugFile -Append 
