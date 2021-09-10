@@ -62,8 +62,8 @@ foreach ($Domain in $Domains){
     ($_.givenName -notlike '*service*') -and
     ($_.sn -notlike '*service*') -and
     ($_.displayname -notlike '*service*')  -and
-    ($_.DistinguishedName -notlike 'CN=Users,DC=Alco,DC=local')
-    ($_.DistinguishedName -notlike 'CN=Users,DC=jbdlab,DC=local')
+    ($_.DistinguishedName -notlike '*CN=Users,DC=Alco,DC=local')
+    ($_.DistinguishedName -notlike '*CN=Users,DC=jbdlab,DC=local')
     ($_.DistinguishedName -notlike 'CN=monitoring*')
     } 
 }
