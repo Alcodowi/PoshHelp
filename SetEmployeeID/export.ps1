@@ -40,7 +40,7 @@ process
     #Loop through changes and update parameters
     foreach ($can in $_.'[ChangedAttributeNames]')
       {    
-           if ($can -eq "AA_needOnlineMailbox"){$AA_needOnlineMailbox = $_."AA_needOnlineMailbox"}                  
+           if ($can -eq "employeeID"){$employeeID = $_."employeeID"}                  
       }
     
     #Supported ChangeType is Replace
@@ -62,17 +62,14 @@ process
             $displayName = $mvUserObj.Attributes.displayName.Values.valuestring
             $alias = $mvUserObj.Attributes.mailNickname.Values.valuestring
             $identity = $mvUserObj.Attributes.accountName.Values.valuestring
-            $nickname = $mvUserObj.Attributes.mailNickname.Values.valuestring
-            $mboxEnabled = $mvUserObj.Attributes.ExchangeMailboxEnabled.Values.valueBoolean
-            $AA_needOnlineMailbox = $mvUserObj.Attributes.AA_needOnlineMailbox.Values.valueBoolean
+            $server = $mvUserObj.attributes.PDCEmulator
+            $employeeID = $mvUserObj.attributes.employeeID
             
             ## If Alias in changed Attrs and user not mailbox enabled then Enable 
-            if (!$mboxEnabled -and $AA_needOnlineMailbox -eq $true){
+            if ($employeeID){
                  "Enable user locally for O365 Mailbox"
                 "Enable Remote Mailbox" | Out-File $DebugFile -Append
-                $userAccount | Out-File $DebugFile -Append
-                $nickname | Out-File $DebugFile -Append
-                $localremoteMbx = Enable-RemoteMailbox -Identity $userAccount -RemoteRoutingAddress "$($nickname)@jbdlab.mail.onmicrosoft.com"
+                Set-ADUser -Identity $identity -Server $server -EmployeeID $employeeID
                 # Enable Archive
                 #"Enable Remote Mailbox In-Place Archive" | Out-File $DebugFile -Append   
                 #$localremoteArchive = Set-RemoteMailbox -Identity $userAccount -ArchiveName "In-Place Archive - $($displayName)"                
