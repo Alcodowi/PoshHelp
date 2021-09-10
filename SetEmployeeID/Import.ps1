@@ -58,7 +58,7 @@ foreach ($Domain in $Domains){
     ($_.displayname -notlike '*service*')  
     } 
 }
-    "     $($Users.count) users retreived from Active Directory "  + (Get-Date) | out-file $DebugFile -Append
+    "     $($users.count) users retreived from Active Directory "  + (Get-Date) | out-file $DebugFile -Append
     
 
 "     Processing user " +(Get-Date) | Out-File $DebugFile -Append
