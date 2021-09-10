@@ -34,6 +34,8 @@ if(!(Test-Path $DebugFilePath))
 >
 #$users | Add-Member -Type NoteProperty -Name "PDCEmulator" -Force -Value ""    
 $domains ="Alco.local","jbdlab.local"
+$alco="Alco.local"
+$jbdlab="jbdlab.local"
 $users | Add-Member -Type NoteProperty -Name "PDCEmulator|String" -Value "$PDC" -force
 foreach ($Domain in $Domains){
 
@@ -72,7 +74,15 @@ foreach ($Domain in $Domains){
         $UserObj = @{}
         $UserObj.add("SamAccountName", $User.SamAccountName)
         $UserObj.add("objectClass", "Externaluser") 
-        $UserObj.add("PDCEmulator", $user.PDCEmulator)
+        
+        if ($user.DistinguishedName -contains "DC=Alco,DC=local"){
+
+        $UserObj.add("PDCEmulator", $alco)
+        }
+        else {
+            $UserObj.add("PDCEmulator", $jbdlab) 
+        }        
+
         $UserObj.add("DistinguishedName",$User.DistinguishedName)
         $UserObj.add("employeeType",$User.employeeType)
         $UserObj.add("mail",$User.mail)
