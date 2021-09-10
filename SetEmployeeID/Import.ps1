@@ -34,7 +34,7 @@ if(!(Test-Path $DebugFilePath))
 >
 #$users | Add-Member -Type NoteProperty -Name "PDCEmulator" -Force -Value ""    
 $domains ="Alco.local","jbdlab.local"
-$users | Add-Member -Type NoteProperty -Name "PDCEmulator|String" -Value ""
+$users | Add-Member -Type NoteProperty -Name "PDCEmulator|String" -Value "" -force
 foreach ($Domain in $Domains){
 
     $GetDom = Get-ADDomain $Domain
